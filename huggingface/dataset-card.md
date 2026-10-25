@@ -24,7 +24,7 @@ configs:
 
 A benchmark for how often AI models fabricate when they talk about wine, by sommelier Woody Wu. Code and full documentation: [github.com/woodywu-sommelier/constance-test](https://github.com/woodywu-sommelier/constance-test).
 
-**Status: v0.1 draft.** 23 dev questions, each marked `draft` until reviewed and confirmed by hand. A private held-out test set is planned.
+**Status: v0.1.** 23 dev questions, all reviewed and confirmed by hand by Woody Wu on 2026-10-25. A private held-out test set is planned.
 
 ## Traps
 

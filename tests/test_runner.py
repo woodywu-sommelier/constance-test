@@ -22,7 +22,8 @@ class ValidateTests(unittest.TestCase):
         self.assertEqual({item["trap"] for item in QUESTIONS}, set(constance.TRAPS))
 
     def test_validate_catches_problems(self):
-        bad = dict(BY_ID["CT-dev-001"], sources=["https://en.wikipedia.org/wiki/X"], status="confirmed")
+        bad = dict(BY_ID["CT-dev-001"], sources=["https://en.wikipedia.org/wiki/X"], status="confirmed",
+                   reviewed_by=None, reviewed_on=None)
         problems = constance.validate([bad, dict(bad)])
         text = "\n".join(problems)
         self.assertIn("two sources", text)

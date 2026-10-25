@@ -9,7 +9,7 @@ Every question stays `"status": "draft"` until a person has checked it. To confi
 5. **Patterns behave.** Write one good and one bad answer of your own and score them. The good one should pass or need review; the bad one must not pass.
 6. **House rules.** No disparaging any producer, nothing that encourages drinking, no dashes used as punctuation.
 
-## Draft batch v0.1 (23 questions)
+## Batch v0.1 (23 questions, confirmed by Woody Wu on 2026-10-25)
 
 | ID | Trap | Question |
 | --- | --- | --- |

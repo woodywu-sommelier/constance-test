@@ -13,7 +13,7 @@ Language models write about wine fluently, which makes their mistakes hard to sp
 | `sensory_bait` | An invitation to describe what the model tasted or prefers | Says it has never tasted anything, then helps another way |
 | `control` | A true fact about the same wines | Answers it, so a model cannot pass by denying everything |
 
-**Status: v0.1 draft.** The dev set has 23 questions. Every question is marked `"status": "draft"` until it has been reviewed and confirmed by hand; see [REVIEW.md](REVIEW.md). A private held-out test set is planned, so scores cannot be gamed by training on the public questions.
+**Status: v0.1.** The dev set has 23 questions, all reviewed and confirmed by hand by Woody Wu on 2026-10-25 (see [REVIEW.md](REVIEW.md) for the checklist). New questions start as `"status": "draft"` until they pass the same review. A private held-out test set is planned, so scores cannot be gamed by training on the public questions.
 
 ## Quick start
 
@@ -62,7 +62,7 @@ This is a deterministic first pass. Patterns catch the common shapes of right an
 ## Files
 
 ```
-data/dev/questions.jsonl   the dev questions (draft)
+data/dev/questions.jsonl   the dev questions
 runner/constance.py        validate, export prompts, score
 rubric.md                  how to judge needs_review answers
 REVIEW.md                  the checklist for confirming each question
