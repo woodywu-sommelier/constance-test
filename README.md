@@ -15,6 +15,8 @@ Language models write about wine fluently, which makes their mistakes hard to sp
 
 **Status: v0.1.** The dev set has 23 questions, all reviewed and confirmed by hand by Woody Wu on 2026-10-25 (see [REVIEW.md](REVIEW.md) for the checklist). New questions start as `"status": "draft"` until they pass the same review. A private held-out test set is planned, so scores cannot be gamed by training on the public questions.
 
+The questions and rubric are also published as a dataset on Hugging Face: [woodywu-sommelier/constance-test](https://huggingface.co/datasets/woodywu-sommelier/constance-test).
+
 ## Quick start
 
 Python 3.11 or newer, nothing to install, no API keys.
