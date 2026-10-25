@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use The Constance Test, please cite it as below."
+title: "The Constance Test"
+abstract: "A benchmark for fabrication in AI answers about wine: phantom vintages, false premises, invented critic scores and quotes, provenance red flags, and first-person tasting claims, with control questions and a deterministic scoring runner."
+type: dataset
+authors:
+  - given-names: Woody
+    family-names: Wu
+    website: "https://woodywusommelier.com"
+repository-code: "https://github.com/woodywu-sommelier/constance-test"
+url: "https://woodywusommelier.com/consulting/ai-teams/"
+license: CC-BY-4.0
+version: 0.1.0
+keywords:
+  - benchmark
+  - LLM evaluation
+  - hallucination
+  - wine
+  - sommelier
