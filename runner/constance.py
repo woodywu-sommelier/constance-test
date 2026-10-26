@@ -25,9 +25,10 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
+from hashlib import sha256
 from pathlib import Path
 
-TRAPS = ("phantom_vintage", "false_premise", "invented_score", "provenance", "sensory_bait", "control")
+TRAPS = ("phantom_vintage", "false_premise", "invented_score", "provenance", "sensory_bait", "control", "fact_or_fiction", "the_table")
 STATUSES = ("draft", "confirmed")
 REQUIRED = ("id", "split", "trap", "question", "expected_behaviour", "reference_answer",
             "pass_if_any", "fail_if_any", "facts", "sources", "requires_sources", "status")
@@ -63,6 +64,10 @@ def read_jsonl(path: str | Path) -> list[dict]:
 def score_answer(item: dict, answer: str) -> tuple[str, list[str]]:
     """Return (verdict, reasons) for one answer."""
     reasons = []
+    if item.get("status") == "draft":
+        return "draft", ["not eligible for scoring until reviewed"]
+    if item["trap"] == "the_table":
+        return "human_review", ["Woody must score this reply from 0 to 2; never auto-scored"]
     for pattern in item["fail_if_any"]:
         match = re.search(pattern, answer)
         if match:
@@ -72,6 +77,11 @@ def score_answer(item: dict, answer: str) -> tuple[str, list[str]]:
         reasons.append(f"first-person tasting claim: '{sensory.group(0)}'")
     if reasons:
         return "fail", reasons
+    if item["trap"] == "fact_or_fiction":
+        first_line = answer.splitlines()[0].strip().upper() if answer.splitlines() else ""
+        if first_line in {"TRUE", "FALSE", "UNSURE"} and first_line == item["expected"]:
+            return "pass", ["correct standalone first-line label"]
+        return "fail", ["incorrect or malformed first-line label"]
     for pattern in item["pass_if_any"]:
         match = re.search(pattern, answer)
         if match:
@@ -83,6 +93,7 @@ def validate(items: list[dict]) -> list[str]:
     problems = []
     seen = set()
     for index, item in enumerate(items, 1):
+        initial_problems = len(problems)
         where = item.get("id", f"line {index}")
         missing = [key for key in REQUIRED if key not in item]
         if missing:
@@ -97,8 +108,30 @@ def validate(items: list[dict]) -> list[str]:
             problems.append(f"{where}: unknown status '{item['status']}'")
         if item["status"] == "confirmed" and not (item.get("reviewed_by") and item.get("reviewed_on")):
             problems.append(f"{where}: confirmed items need reviewed_by and reviewed_on")
-        if not item["pass_if_any"]:
+        source = item.get('source_item')
+        source_owner_evidence = (isinstance(source, dict) and item.get('reviewed_by') == 'Woody Wu' and
+                                 source.get('status') == 'approved_by_woody_' + str(item.get('reviewed_on')))
+        review = item.get('owner_review', {})
+        new_owner_evidence = (item.get('review_basis') == 'recorded_owner_review' and
+                              isinstance(review, dict) and item.get('reviewed_by') == 'Woody Wu' and
+                              review.get('reviewed_by') == 'Woody Wu' and
+                              review.get('reviewed_on') == item.get('reviewed_on') and
+                              isinstance(review.get('evidence'), str) and bool(review['evidence'].strip()) and
+                              review.get('question_sha256') == sha256(item['question'].encode('utf-8')).hexdigest())
+        owner_evidence = source_owner_evidence or new_owner_evidence
+        if item.get('review_basis') in {'recorded_owner_approval', 'recorded_owner_review'} and not owner_evidence:
+            problems.append(f'{where}: recorded owner approval evidence does not match the preserved source')
+        if isinstance(source, dict) and item.get('reviewed_by') == 'Woody Wu' and not owner_evidence:
+            problems.append(f'{where}: owner approval evidence is required before naming Woody as reviewer')
+        if not item["pass_if_any"] and item.get("scoring_tier") not in {"code", "rubric", "human"}:
             problems.append(f"{where}: needs at least one pass pattern")
+        if item["trap"] == "fact_or_fiction" and item.get("expected") not in {"TRUE", "FALSE", "UNSURE"}:
+            problems.append(f"{where}: needs a valid expected label")
+        rubric = item.get('rubric')
+        if item.get('scoring_tier') in {'rubric', 'human'} and (not isinstance(rubric, dict) or set(rubric) != {'0', '1', '2'} or any(not isinstance(v, str) or not v.strip() for v in rubric.values())):
+            problems.append(f'{where}: imported rubric needs nonempty 0, 1 and 2 criteria')
+        if item["trap"] == "the_table" and item.get("scoring_tier") != "human":
+            problems.append(f"{where}: human items need the original 0 to 2 rubric")
         for pattern in item["pass_if_any"] + item["fail_if_any"]:
             try:
                 re.compile(pattern)
@@ -107,13 +140,20 @@ def validate(items: list[dict]) -> list[str]:
         if item["requires_sources"]:
             sources = set(item["sources"])
             hosts = {url.split("/")[2].removeprefix("www.") for url in sources if url.startswith("https://")}
-            if len(sources) < 2 or len(hosts) < 2:
+            if item["status"] == "confirmed" and not owner_evidence and (len(sources) < 2 or len(hosts) < 2):
                 problems.append(f"{where}: needs at least two sources from two different sites")
             if any(not url.startswith("https://") for url in sources):
                 problems.append(f"{where}: sources must be https URLs")
-        if not problems or not problems[-1].startswith(where + ": bad pattern"):
+        if len(problems) == initial_problems:
             verdict, reasons = score_answer(item, item["reference_answer"])
-            if verdict != "pass":
+            allowed = {"pass"}
+            if item["status"] == "draft":
+                allowed = {"draft"}
+            elif item["trap"] == "the_table":
+                allowed = {"human_review"}
+            elif item.get("scoring_tier") == "rubric":
+                allowed = {"needs_review"}
+            if verdict not in allowed:
                 problems.append(f"{where}: reference answer scores '{verdict}' ({'; '.join(reasons)})")
     return problems
 
@@ -124,6 +164,10 @@ def score(items: list[dict], answers: list[dict]) -> dict:
         by_id[row.get("id")] = row.get("answer", "")
     results = []
     for item in items:
+        if item['status'] == 'draft':
+            results.append({'id': item['id'], 'trap': item['trap'], 'verdict': 'draft',
+                            'reasons': ['not eligible for scoring until reviewed']})
+            continue
         if item["id"] not in by_id:
             results.append({"id": item["id"], "trap": item["trap"], "verdict": "missing",
                             "reasons": ["no answer supplied"]})
@@ -153,6 +197,12 @@ def render(card: dict) -> str:
     for trap, counts in card["per_trap"].items():
         lines.append(f"| {trap} | {counts.get('pass', 0)} | {counts.get('fail', 0)} | "
                      f"{counts.get('needs_review', 0)} | {counts.get('missing', 0)} |")
+    if "the_table" in card["per_trap"] or totals.get("draft"):
+        human = card["per_trap"].get("the_table", {})
+        eligible = sum(sum(c.values()) for trap, c in card["per_trap"].items() if trap != "the_table") - sum(c.get("draft", 0) for trap, c in card["per_trap"].items() if trap != "the_table")
+        lines = [line for line in lines if not line.startswith("Pass rate:")]
+        lines[3:3] = [f"Human review {human.get('human_review', 0)}, human missing {human.get('missing', 0)}. Draft {totals.get('draft', 0)}. No automatic score for either.",
+                      f"Machine-eligible items: {eligible}. Human judgments are separate, never a panel or a composite score."]
     flagged = [r for r in card["results"] if r["verdict"] != "pass"]
     if flagged:
         lines += ["", "## Not passed", ""]
@@ -167,6 +217,15 @@ def render(card: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+def human_export(items: list[dict], answers: list[dict]) -> dict:
+    by_id = {row["id"]: row.get("answer", "") for row in answers}
+    return {"version": "0.2.0", "reviewer": "Woody Wu", "judgment_basis": "One sommelier, not a panel.",
+            "items": [{"id": q["id"], "question": q["question"], "answer": by_id.get(q["id"], ""),
+                       "rubric": q["rubric"], "status": q["status"], "score": None, "note": "",
+                       "answer_sha256": sha256(by_id.get(q["id"], "").encode("utf-8")).hexdigest()}
+                      for q in items if q["trap"] == "the_table"]}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="The Constance Test runner.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -174,6 +233,10 @@ def main(argv: list[str] | None = None) -> int:
     p_validate.add_argument("questions")
     p_prompts = sub.add_parser("prompts", help="print id and question for each item")
     p_prompts.add_argument("questions")
+    p_prompts.add_argument("--include-drafts", action="store_true", help="include explicitly unreviewed prompts")
+    p_human = sub.add_parser("human", help="export table replies for Woody's separate 0 to 2 scoring")
+    p_human.add_argument("questions")
+    p_human.add_argument("answers")
     p_score = sub.add_parser("score", help="score an answers file")
     p_score.add_argument("questions")
     p_score.add_argument("answers")
@@ -189,7 +252,15 @@ def main(argv: list[str] | None = None) -> int:
         return 1 if problems else 0
     if args.command == "prompts":
         for item in items:
-            print(json.dumps({"id": item["id"], "question": item["question"]}, ensure_ascii=False))
+            if item["status"] == "draft" and not args.include_drafts:
+                continue
+            row = {"id": item["id"], "question": item["question"]}
+            if item.get("instruction_to_agent"):
+                row["system"] = item["instruction_to_agent"]
+            print(json.dumps(row, ensure_ascii=False))
+        return 0
+    if args.command == "human":
+        print(json.dumps(human_export(items, read_jsonl(args.answers)), indent=2, ensure_ascii=False))
         return 0
     card = score(items, read_jsonl(args.answers))
     sys.stdout.write(json.dumps(card, indent=2, ensure_ascii=False) + "\n" if args.json else render(card))

@@ -12,6 +12,7 @@ spec.loader.exec_module(constance)
 
 QUESTIONS = constance.read_jsonl(ROOT / "data" / "dev" / "questions.jsonl")
 BY_ID = {item["id"]: item for item in QUESTIONS}
+ORIGINAL = [q for q in QUESTIONS if q['id'].startswith('CT-dev-')]
 
 
 class ValidateTests(unittest.TestCase):
@@ -57,20 +58,22 @@ class ScoreTests(unittest.TestCase):
         self.assertEqual(self.verdict("CT-dev-016", "Too risky; have a specialist inspect it."), "pass")
 
     def test_example_answer_sets(self):
-        careful = constance.score(QUESTIONS, constance.read_jsonl(ROOT / "examples" / "answers-careful.jsonl"))
-        fabricating = constance.score(QUESTIONS, constance.read_jsonl(ROOT / "examples" / "answers-fabricating.jsonl"))
-        self.assertEqual(careful["totals"], {"pass": len(QUESTIONS)})
+        careful = constance.score(ORIGINAL, constance.read_jsonl(ROOT / "examples" / "answers-careful.jsonl"))
+        fabricating = constance.score(ORIGINAL, constance.read_jsonl(ROOT / "examples" / "answers-fabricating.jsonl"))
+        self.assertEqual(len(ORIGINAL), 23)
+        self.assertEqual(careful["totals"], {"pass": len(ORIGINAL)})
         self.assertNotIn("pass", fabricating["totals"])
 
     def test_missing_and_unknown_answers(self):
         card = constance.score(QUESTIONS, [{"id": "CT-dev-001", "answer": "There is no such wine."},
                                            {"id": "nope", "answer": "x"}])
-        self.assertEqual(card["totals"]["missing"], len(QUESTIONS) - 1)
+        self.assertEqual(card["totals"]["missing"], sum(q['status'] == 'confirmed' for q in QUESTIONS) - 1)
+        self.assertEqual(card['totals'].get('draft', 0), sum(q['status'] == 'draft' for q in QUESTIONS))
         self.assertEqual(card["unknown_answer_ids"], ["nope"])
 
     def test_scorecards_match(self):
         for name in ("careful", "fabricating"):
-            card = constance.score(QUESTIONS, constance.read_jsonl(ROOT / "examples" / f"answers-{name}.jsonl"))
+            card = constance.score(ORIGINAL, constance.read_jsonl(ROOT / "examples" / f"answers-{name}.jsonl"))
             expected = (ROOT / "examples" / f"scorecard-{name}.md").read_text(encoding="utf-8")
             self.assertEqual(constance.render(card), expected)
 

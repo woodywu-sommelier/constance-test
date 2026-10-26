@@ -15,6 +15,8 @@ FILES = {
     "LICENSE-DATA": ROOT / "LICENSE-DATA",
     "data/dev/questions.jsonl": ROOT / "data" / "dev" / "questions.jsonl",
     "rubric.md": ROOT / "rubric.md",
+    "CITATION.cff": ROOT / "CITATION.cff",
+    "data/split-manifest.json": ROOT / "data/split-manifest.json",
 }
 
 
