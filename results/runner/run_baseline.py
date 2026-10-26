@@ -10,8 +10,8 @@ Usage (from the repository root):
     python3 results/runner/run_baseline.py run            # the paid run (resumable)
     python3 results/runner/run_baseline.py score          # score saved answers; no API calls
 
-Models are written provider:model-id. The defaults are the four models of the
-v0.2 baseline; pass --models to change them.
+Models are written provider:model-id. The defaults are the three models of the
+v0.2 baseline (two Claude, one Gemini); pass --models to change them.
 
 Each model gets the question as one user message with the provider's default
 settings. The only system text is the question's own instruction_to_agent,
@@ -43,8 +43,10 @@ QUESTIONS = REPO / "data" / "dev" / "questions.jsonl"
 MANIFEST = REPO / "data" / "split-manifest.json"
 OUT = REPO / "results" / "v0.2-baseline"
 TABLE_EXPORT = REPO / "results" / "the_table-for-woody.md"
+# The v0.2 baseline runs three models. OpenAI support stays in the code but is
+# not in the default set; add "openai:<model>" with --models to include it.
 DEFAULT_MODELS = ["anthropic:claude-sonnet-5-5", "anthropic:claude-haiku-5-5",
-                  "openai:gpt-6-astra", "google:gemini-4-argon"]
+                  "google:gemini-4-argon"]
 PROVIDERS = ("anthropic", "openai", "google")
 MAX_OUTPUT_TOKENS = 16000
 TRANSIENT_HTTP = [408, 429, 500, 502, 503, 504]
@@ -213,7 +215,7 @@ def dry_run(specs: list[str], items: list[dict], out: Path = OUT) -> str:
         lines.append(f"| {spec} | {len(todo)} | {tin:,} | {out_low:,} to {out_high:,} | {cost_cell} | {price_cell} |")
     lines += ["", f"Estimated total: {money(total_low)} to {money(total_high)}.",
               f"Output assumes {EST_OUTPUT_LOW} to {EST_OUTPUT_HIGH} tokens per answer; the high end "
-              "allows for reasoning tokens, which all three providers bill as output.",
+              "allows for reasoning tokens, which these providers bill as output.",
               "No API calls were made."]
     return "\n".join(lines)
 

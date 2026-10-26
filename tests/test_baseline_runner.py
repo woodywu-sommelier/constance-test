@@ -124,7 +124,8 @@ class BaselineRunnerTests(unittest.TestCase):
 
     def test_dry_run_makes_no_calls(self):
         text = rb.dry_run(rb.DEFAULT_MODELS, self.items, self.out)
-        self.assertIn("51 questions x 4 models = 204 calls", text)
+        self.assertIn("51 questions x 3 models = 153 calls", text)
+        self.assertNotIn("openai", text, "OpenAI is supported but not in the default run")
         self.assertIn("No API calls were made.", text)
         self.assertFalse(self.out.exists())
 

@@ -12,7 +12,9 @@ python3 results/runner/run_baseline.py run            # paid; resumable; keeps p
 python3 results/runner/run_baseline.py score          # re-score saved answers; no API calls
 ```
 
-API keys come only from the environment (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GOOGLE_API_KEY`). Network access needed: `api.anthropic.com`, `api.openai.com`, `generativelanguage.googleapis.com`. Prices for estimates are in `results/runner/prices.json`.
+The default run is three models: `claude-sonnet-5-5`, `claude-haiku-5-5` and `gemini-4-argon`. OpenAI support is in the code but not in the default set; add it with `--models openai:<model>`.
+
+API keys come only from the environment (`ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, and `OPENAI_API_KEY` only if OpenAI is run). Network access needed: `api.anthropic.com`, `generativelanguage.googleapis.com`, and `api.openai.com` only for OpenAI. Prices for estimates are in `results/runner/prices.json`.
 
 The runner refuses to start unless `data/dev/questions.jsonl` matches the SHA-256 in `data/split-manifest.json`, and scores with `runner/constance.py` unchanged.
 
