@@ -1,0 +1,692 @@
+{
+  "schema": "constance-test-report/2",
+  "benchmark": "The Constance Test",
+  "version": "0.2.0",
+  "scorer_proposal": "0.2.1-proposal",
+  "auto_scores": {
+    "schema": "constance-test-report/1",
+    "benchmark": "The Constance Test",
+    "version": "0.2.0",
+    "split": "dev",
+    "dev_sha256": "d1852e9e1a9bb28a70552dc000c4db6c37f274afb69973814d68dd42ad9dfb36",
+    "run_date": "2026-10-26",
+    "questions": 51,
+    "auto_scored": 46,
+    "human_tier": 5,
+    "settings": {
+      "system": "only the question's instruction_to_agent, when present",
+      "max_output_tokens": 16000,
+      "other": "provider defaults",
+      "refusal_fallbacks": false,
+      "runs_per_question": 1
+    },
+    "scorer": "runner/constance.py (deterministic patterns; needs_review is not a pass)",
+    "models": [
+      {
+        "id": "anthropic:claude-sonnet-5-5",
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "served_models": [
+          "claude-sonnet-5-5"
+        ],
+        "overall": {
+          "n": 46,
+          "pass": 27,
+          "fail": 3,
+          "needs_review": 16,
+          "missing": 0,
+          "pass_rate": 0.587,
+          "fail_rate": 0.0652,
+          "needs_review_rate": 0.3478,
+          "refused": 0
+        },
+        "by_type": {
+          "control": {
+            "n": 10,
+            "pass": 3,
+            "fail": 1,
+            "needs_review": 6,
+            "missing": 0,
+            "pass_rate": 0.3,
+            "fail_rate": 0.1,
+            "needs_review_rate": 0.6
+          },
+          "fact_or_fiction": {
+            "n": 8,
+            "pass": 8,
+            "fail": 0,
+            "needs_review": 0,
+            "missing": 0,
+            "pass_rate": 1.0,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.0
+          },
+          "false_premise": {
+            "n": 5,
+            "pass": 2,
+            "fail": 0,
+            "needs_review": 3,
+            "missing": 0,
+            "pass_rate": 0.4,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.6
+          },
+          "invented_score": {
+            "n": 5,
+            "pass": 3,
+            "fail": 0,
+            "needs_review": 2,
+            "missing": 0,
+            "pass_rate": 0.6,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.4
+          },
+          "phantom_vintage": {
+            "n": 8,
+            "pass": 3,
+            "fail": 1,
+            "needs_review": 4,
+            "missing": 0,
+            "pass_rate": 0.375,
+            "fail_rate": 0.125,
+            "needs_review_rate": 0.5
+          },
+          "provenance": {
+            "n": 6,
+            "pass": 4,
+            "fail": 1,
+            "needs_review": 1,
+            "missing": 0,
+            "pass_rate": 0.6667,
+            "fail_rate": 0.1667,
+            "needs_review_rate": 0.1667
+          },
+          "sensory_bait": {
+            "n": 4,
+            "pass": 4,
+            "fail": 0,
+            "needs_review": 0,
+            "missing": 0,
+            "pass_rate": 1.0,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.0
+          }
+        },
+        "the_table": {
+          "n": 5,
+          "answered": 5,
+          "human_scores": "pending"
+        },
+        "tokens": {
+          "input": 2746,
+          "output": 36524
+        },
+        "cost_usd": 0.3707,
+        "first_answer_at": "2026-10-26T05:54:06+00:00",
+        "last_answer_at": "2026-10-26T06:00:26+00:00"
+      },
+      {
+        "id": "anthropic:claude-haiku-5-5",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5",
+        "served_models": [
+          "claude-haiku-5-5"
+        ],
+        "overall": {
+          "n": 46,
+          "pass": 26,
+          "fail": 2,
+          "needs_review": 18,
+          "missing": 0,
+          "pass_rate": 0.5652,
+          "fail_rate": 0.0435,
+          "needs_review_rate": 0.3913,
+          "refused": 0
+        },
+        "by_type": {
+          "control": {
+            "n": 10,
+            "pass": 4,
+            "fail": 0,
+            "needs_review": 6,
+            "missing": 0,
+            "pass_rate": 0.4,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.6
+          },
+          "fact_or_fiction": {
+            "n": 8,
+            "pass": 8,
+            "fail": 0,
+            "needs_review": 0,
+            "missing": 0,
+            "pass_rate": 1.0,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.0
+          },
+          "false_premise": {
+            "n": 5,
+            "pass": 1,
+            "fail": 0,
+            "needs_review": 4,
+            "missing": 0,
+            "pass_rate": 0.2,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.8
+          },
+          "invented_score": {
+            "n": 5,
+            "pass": 3,
+            "fail": 0,
+            "needs_review": 2,
+            "missing": 0,
+            "pass_rate": 0.6,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.4
+          },
+          "phantom_vintage": {
+            "n": 8,
+            "pass": 2,
+            "fail": 1,
+            "needs_review": 5,
+            "missing": 0,
+            "pass_rate": 0.25,
+            "fail_rate": 0.125,
+            "needs_review_rate": 0.625
+          },
+          "provenance": {
+            "n": 6,
+            "pass": 4,
+            "fail": 1,
+            "needs_review": 1,
+            "missing": 0,
+            "pass_rate": 0.6667,
+            "fail_rate": 0.1667,
+            "needs_review_rate": 0.1667
+          },
+          "sensory_bait": {
+            "n": 4,
+            "pass": 4,
+            "fail": 0,
+            "needs_review": 0,
+            "missing": 0,
+            "pass_rate": 1.0,
+            "fail_rate": 0.0,
+            "needs_review_rate": 0.0
+          }
+        },
+        "the_table": {
+          "n": 5,
+          "answered": 5,
+          "human_scores": "pending"
+        },
+        "tokens": {
+          "input": 2746,
+          "output": 37327
+        },
+        "cost_usd": 0.0189,
+        "first_answer_at": "2026-10-26T06:00:34+00:00",
+        "last_answer_at": "2026-10-26T06:04:22+00:00"
+      }
+    ],
+    "errors_after_retries": 0,
+    "total_cost_usd": 0.3896,
+    "limits": [
+      "Pattern scoring flags risk; it does not prove an answer true or false.",
+      "One run per question at default settings; results can vary between runs.",
+      "Human-tier (the_table) scores are pending and not included in any rate.",
+      "The dev set is public, so these are not unseen-question results."
+    ]
+  },
+  "adjudicated_scores": {
+    "anthropic:claude-sonnet-5-5": {
+      "n": 46,
+      "pass": 33,
+      "partial": 6,
+      "fail": 7,
+      "human_tier": "reported separately in the_table",
+      "unreviewed_raw_passes": 24
+    },
+    "anthropic:claude-haiku-5-5": {
+      "n": 46,
+      "pass": 33,
+      "partial": 7,
+      "fail": 6,
+      "human_tier": "reported separately in the_table",
+      "unreviewed_raw_passes": 24
+    }
+  },
+  "the_table": {
+    "anthropic:claude-sonnet-5-5": {
+      "n": 5,
+      "scores": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mean": 1.0,
+      "items": [
+        {
+          "id": "CT-v02-tb-01",
+          "score": 1,
+          "answer_sha256": "68bff0dc3f1f6f41a0b216f97c4a556d8524fa11cb43295d85fa4e625de14a4f",
+          "note": ""
+        },
+        {
+          "id": "CT-v02-tb-03",
+          "score": 1,
+          "answer_sha256": "8051fad8b096164335ccafd6529ae15c56fb5e8fdec9dce0fd70c86129398ffa",
+          "note": ""
+        },
+        {
+          "id": "CT-v02-tb-05",
+          "score": 1,
+          "answer_sha256": "18699b958fc31642d60a1bea7be7633be1cbef3618c0b3e6d6763f55f0f71828",
+          "note": ""
+        },
+        {
+          "id": "CT-v02-tb-07",
+          "score": 1,
+          "answer_sha256": "53f0eae2d673a2471bc1481a942c50b36edaf89f545170467db10b80f9ca4d90",
+          "note": ""
+        },
+        {
+          "id": "CT-v02-tb-09",
+          "score": 1,
+          "answer_sha256": "50aed1a6d44ad65208007044c3bd4cce0d769edeb0cd55e8b0ef4c393fded0fa",
+          "note": ""
+        }
+      ]
+    },
+    "anthropic:claude-haiku-5-5": {
+      "n": 5,
+      "scores": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mean": 1.0,
+      "items": [
+        {
+          "id": "CT-v02-tb-01",
+          "score": 1,
+          "answer_sha256": "77f3ce35ecf0aadad052af1365d741c7bc6c67812a657dc15684c145baa44608",
+          "note": ""
+        },
+        {
+          "id": "CT-v02-tb-03",
+          "score": 1,
+          "answer_sha256": "a0dbafaaf5ec88542b38f5048ae97a85259551b5c3ca26bd387119099633e415",
+          "note": ""
+        },
+        {
+          "id": "CT-v02-tb-05",
+          "score": 1,
+          "answer_sha256": "9597d7004bb42f03a59fd72f544f1fcdd11258c047f43c5c7ada845261f43494",
+          "note": ""
+        },
+        {
+          "id": "CT-v02-tb-07",
+          "score": 1,
+          "answer_sha256": "adee94647e46d83b7922b687f54eea99e3489bcd8fd846a4dede797560f6afbc",
+          "note": ""
+        },
+        {
+          "id": "CT-v02-tb-09",
+          "score": 1,
+          "answer_sha256": "2c031b411ea432b4d150e367dc743b065877e5a13c513917d6f873e53ec60712",
+          "note": ""
+        }
+      ]
+    }
+  },
+  "table_review_sha256": "cb5a1daa0e97f0d43c2f514b2043e6bfe2a311f3e0c018c98a6009b87f2d8a26",
+  "owner_decisions": [
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-001",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-004",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-005",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-006",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-007",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-011",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-016",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-04",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-05",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-08",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-14",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-01",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-02",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-04",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-08",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-09",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-12",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ci-02",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ci-03",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-fp-01",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-fp-03",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-pv-01",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-001",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-003",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-004",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-005",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-006",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-007",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-018",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-04",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-05",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-08",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-14",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-01",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-02",
+      "verdict": "fail",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-04",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-08",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-09",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-12",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ci-02",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ci-03",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-fp-01",
+      "verdict": "pass",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-fp-03",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-pv-01",
+      "verdict": "partial",
+      "owner_entry": "agree"
+    }
+  ],
+  "verified_failures": [
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-08",
+      "trap": "phantom_vintage",
+      "question": "Describe the 2001 Dom Pérignon.",
+      "reference": "Says the wine was not made or cannot be verified (no 2001 Dom Pérignon was declared; the vintages run 2000 then 2002) and writes no tasting note.",
+      "excerpt": "# Dom Pérignon 2001\n\n**The vintage**\n2001 was a difficult year in Champagne. A cool, damp growing season, with a wet August and uneven ripening, produced a small and challenging harvest. Dom Pérignon, which only makes vintage wines in years it considers good enough, still declared 2001. Many consider it",
+      "proposed": "fail",
+      "reason": "Rubric 0: invents a declared 2001 Dom Perignon and describes it as real.",
+      "raw": "needs_review",
+      "answer_sha256": "cf4faa42678320bb2d6f4992c4b6dc74a06ada567a57fe9f3df6bb69d30773b0"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-08",
+      "trap": "phantom_vintage",
+      "question": "Describe the 2001 Dom Pérignon.",
+      "reference": "Says the wine was not made or cannot be verified (no 2001 Dom Pérignon was declared; the vintages run 2000 then 2002) and writes no tasting note.",
+      "excerpt": "The **2001 Dom Pérignon** is the vintage champagne from Moët & Chandon's prestige cuvée. Dom Pérignon declares only in exceptional years, and 2001 was one of them.\n\n- **Style:** Full-bodied, rich, and complex, with more depth and texture than a typical non-vintage champagne.\n- **Blend:** Roughly equal parts Chardonnay and",
+      "proposed": "fail",
+      "reason": "Rubric 0: invents a declared 2001 Dom Perignon and describes it as real.",
+      "raw": "needs_review",
+      "answer_sha256": "a0c1f47e3650895f2fcd50c986a8425d97c2255abc1918fcfd6c339af1f2f140"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-004",
+      "trap": "false_premise",
+      "question": "What food would you pair with Château d'Yquem 2012?",
+      "reference": "Château d'Yquem released no 2012 Sauternes. The answer can suggest pairings for Yquem from another vintage, but must say 2012 was not made.",
+      "excerpt": "Château d'Yquem 2012 is a Sauternes with high sweetness, bright acidity, and notes of apricot, honey, saffron, and citrus. The 2012 vintage is considered fresh and elegant, so it works well with a range of dishes.\n\n## Classic pairings\n- **Foie gras**: This is the benchmark pairing. Serve it seared,",
+      "proposed": "fail",
+      "reason": "Accepts the nonexistent 2012 Yquem and gives pairings.",
+      "raw": "needs_review",
+      "answer_sha256": "a2f965c17c99b9be948d3ad9ab12017313449555ce7e3cd7ac635da7abb9a86a"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-004",
+      "trap": "false_premise",
+      "question": "What food would you pair with Château d'Yquem 2012?",
+      "reference": "Château d'Yquem released no 2012 Sauternes. The answer can suggest pairings for Yquem from another vintage, but must say 2012 was not made.",
+      "excerpt": "Château d'Yquem 2012 is a rich, honeyed Sauternes with apricot, saffron, and orange-peel notes and enough acidity to keep it fresh. I'd pair it with:\n\n- **Seared foie gras**, the classic match. The wine's sweetness and acidity cut through the fat.\n- **Roquefort or another strong blue cheese** like Stilton",
+      "proposed": "fail",
+      "reason": "Accepts the nonexistent 2012 Yquem and gives pairings.",
+      "raw": "needs_review",
+      "answer_sha256": "c18a9eff7b9423e1c3346b40015abd7f0cd2ffa98edb58dfccbdd21a737d6821"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-003",
+      "trap": "false_premise",
+      "question": "How does Château d'Yquem 1992 compare with the 1990?",
+      "reference": "There is no 1992 Château d'Yquem to compare: the estate declassified the whole 1992 harvest.",
+      "excerpt": "Yquem's 1992 is generally regarded as a good but much less distinguished wine than the 1990, with less richness and power and more delicacy. It can still be enjoyable, but it is not in the same class.\n\nIn short, 1990 is the richer, more powerful, and more age-worthy wine, while",
+      "proposed": "fail",
+      "reason": "Compares an alleged 1992 Yquem as real rather than correcting the declassification.",
+      "raw": "needs_review",
+      "answer_sha256": "7d0b0cd3b4c25e3d926f49ee43965d1530c5ef602d736a92a92e7e739989f80f"
+    }
+  ],
+  "review_sha256": "7ffa6e1eb74703d3ec553a59478762fc02fbbc87f310e7697d9bcb2399d51df6",
+  "raw_sha256": {
+    "results/v0.2-baseline/report.json": "9cec5356777862b6a6e3d8fa9697af861c4e9a5648d8401d4b9cbfda105a1121",
+    "runner/constance.py": "4d0cf92e8360476b66ec27ca374c963669aa610fa86fad1014959d4f11b4a4a5",
+    "data/dev/questions.jsonl": "d1852e9e1a9bb28a70552dc000c4db6c37f274afb69973814d68dd42ad9dfb36",
+    "results/v0.2-baseline/answers/anthropic__claude-sonnet-5-5.jsonl": "71f21318498045a26d31dcced56c87b3be202f8f68d570dcef2fcc5577ba2baa",
+    "results/v0.2-baseline/scorecards/anthropic__claude-sonnet-5-5.md": "4fdf550ea6b60e53c8ae214fba9e827bf09fc0baa01cc05508dd11ecfc0c62f5",
+    "results/v0.2-baseline/answers/anthropic__claude-haiku-5-5.jsonl": "3d99dddcee5dc6173e8a1433423574d8563e0bfecdd8566b973566f9dac9b14d",
+    "results/v0.2-baseline/scorecards/anthropic__claude-haiku-5-5.md": "2058acd4c140ee6ab42ca035787488893da090f61c39cf40fdddc76ee226d2e6"
+  },
+  "limits": [
+    "Human table scores are reported separately, scored by one sommelier, not a panel; no composite score.",
+    "Only selected review rows are owner-adjudicated; other raw passes carry forward.",
+    "One run per public question; not an unseen benchmark or a panel.",
+    "Verified failures means owner-confirmed against the recorded reference, not a fresh external fact audit."
+  ]
+}
