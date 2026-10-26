@@ -15,7 +15,7 @@ Language models write about wine fluently, which makes their mistakes hard to sp
 
 **Status: v0.2 preparation. Baseline results pending.** The merged bank contains **78 unique questions**: 51 public dev and 27 private test. It retains the 23 v0.1 public questions and their wording. Of the 70 local source items, 15 duplicate public wine/trap cases and 55 are new. The additions are split 28 dev and 27 test. Do not describe this as 70 new public questions.
 
-The dev set has 40 confirmed/eligible items and 11 drafts. The private set has 19 confirmed/eligible items and 8 drafts. There are 10 human-tier items, five in each split. Recorded approval of a question is not a completed human score, calibration result or model baseline. No live model results are included.
+The dev set has 51 confirmed/eligible items and no drafts. Woody explicitly approved the 11 formerly public drafts on 2026-10-25; see [the owner approval record](docs/OWNER-APPROVAL-20261025.md). The private set is unchanged, with 19 confirmed/eligible items and 8 drafts. There are 10 human-tier items, five in each split. Recorded approval of a question is not a completed human score, calibration result or model baseline. No live model results are included.
 
 | Type | Public dev | Private test |
 | --- | --- | --- |
@@ -86,7 +86,7 @@ This is a deterministic first pass. Patterns catch the common shapes of right an
 ## Ground rules for questions
 
 - The original 23 questions retain their recorded owner review on 2026-10-25 and sources from the [Hospitality Skills](https://github.com/woodywu-sommelier/hospitality-skills) reference. New items retain their original sources and notes, not invented citations.
-- Imports qualify only through recorded `approved_by_woody_*` approval or at least two distinct HTTPS source sites. Source-qualified imports name the eligibility check, not Woody, as `reviewed_by`. Counting sites is not a new factual audit or proof that two articles are editorially independent. Sources were not reopened during this migration. Everything else stays draft, including fictional-name checks with only one source site.
+- Imports qualify through recorded source approval, a separate question-hash-bound owner review, or at least two distinct HTTPS source sites. New owner approvals preserve historical source statuses in `source_item` and `source_status` rather than rewriting them. Source-qualified imports name the eligibility check, not Woody, as `reviewed_by`. Counting sites is not a new factual audit or proof that two articles are editorially independent. Sources were not reopened during this migration. Everything else stays draft, including private fictional-name checks with only one source site.
 - Human scenarios are owner-approved situations, not assertions that the guest's named wine was tasted. Fictional producers and their verification notes remain explicitly identified.
 - Real producers appear only in sourced facts. No question disparages a producer or encourages drinking.
 - Original reference answers must pass their patterns. Code labels must match, human records must yield `human_review`, and imported rubric criteria must remain `needs_review`. Drafts remain draft. `python3 runner/constance.py validate` checks these distinct contracts.
@@ -116,7 +116,7 @@ python3 runner/bank.py --heldout /absolute/private/path/questions.jsonl
 
 The second command checks the exact-byte private hash and scans every candidate public file, including generated exports, for private question text and IDs. CI tests the checker with synthetic records; the maintainer must also run it against the real private set before publication. Keep `local/heldout/` outside the public checkout. The local source Node repository must not be pushed as this canonical project.
 
-This preparation does not push a branch, create a PR or upload the dataset. Owner approval precedes the PR; the Hugging Face v0.2 upload waits until the PR is merged.
+The owner approved pushing the branch and opening a PR on 2026-10-25 after the real held-out leak check passes. The Hugging Face v0.2 upload waits until the PR is merged. The local dataset build never uploads anything.
 
 ## Who built this
 

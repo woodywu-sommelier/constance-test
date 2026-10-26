@@ -1,6 +1,6 @@
 # v0.2: merge the item bank into the canonical Python project
 
-Prepared locally on branch `v0.2-merge`, based on public commit `f862d5b`. Not pushed, not an open PR, not a dataset upload. Baseline results pending.
+Branch `v0.2-merge`, based on public commit `f862d5b`. Owner approved pushing and opening this PR on 2026-10-25, after the real held-out leak check. No merge or dataset upload is part of that approval. Baseline results pending.
 
 ## Diff summary
 
@@ -31,8 +31,8 @@ The original 23 stay dev; new items are split 28/27, balanced by type, with five
 
 | Eligibility | Public dev | Private test | Total |
 | --- | --- | --- | --- |
-| Confirmed/eligible | 40 | 19 | 59 |
-| Draft | 11 | 8 | 19 |
+| Confirmed/eligible | 51 | 19 | 70 |
+| Draft | 0 | 8 | 8 |
 
 Ten table questions have recorded owner approval. Eligible source-backed imports are not claimed as newly hand-reviewed by Woody. Two HTTPS sites qualify under the handover, but source counting is not independent verification of the underlying claim or editorial independence. Sources were preserved, not reopened during the migration.
 
@@ -58,20 +58,19 @@ Deduplication uses wine identity plus the underlying trap, conservatively includ
 | pv-04 | CT-dev-004 | Same unmade wine and required correction |
 | pv-05 | CT-dev-006 | Same pre-first-vintage impossible wine |
 
-## Drafts and why
+## Owner review and remaining drafts
 
-Public draft source IDs: **ph-04, ph-05, ph-08, ph-14, ct-09, ct-12, ff-11, ff-12, ci-02, ci-03, fp-03**. The public record IDs prefix these with `CT-v02-`.
+Woody explicitly approved these 11 formerly public draft source IDs on **2026-10-25**: **ph-04, ph-05, ph-08, ph-14, ct-09, ct-12, ff-11, ff-12, ci-02, ci-03, fp-03**. The public record IDs prefix these with `CT-v02-`. All now have status `confirmed`, Woody's reviewer credit and today's date. Their separate `owner_review` evidence is bound to each question's SHA-256. See `docs/OWNER-APPROVAL-20261025.md`.
 
-- All lack recorded owner approval.
-- Nine have one source URL/site.
-- ff-11 and ff-12 have two URLs on the same site, not two source sites.
-- A `verified_fictional` status is preserved but is not promoted to owner review or sufficient source coverage.
+- The initial draft classification was correct: nine have one source URL/site; ff-11 and ff-12 have two URLs on one site.
+- Their new owner approval is the eligibility change. No second source was invented.
+- Historical `source_item` and `source_status` remain unchanged, including `verified_fictional` where present.
 
 Eight private questions also stay draft for lack of owner approval and a second source site. Their IDs and reasons are in the owner's private draft ledger, not in a public PR description. The private split includes those drafts but excludes them from default prompt export and all automatic scoring.
 
 ## Verification and limits
 
-- Python 3.11 suite: **35 tests pass**. Both real splits validate with zero schema problems. The dev validator reports its 11 drafts, and the private split contains eight drafts.
+- Python 3.11 suite: **37 tests pass**. Both real splits validate with zero schema problems. The dev validator reports no drafts; the private split still contains eight drafts.
 - Five full-suite mutation checks in disposable copies all fail as intended: use the wrong line for fact labels, auto-classify a human response, admit insufficient source coverage, disable private-text detection, and omit the split commitment from the dataset allowlist. The working checkout was not mutated.
 - Independent review identified three validation gaps. Regression tests reproduce them, and the fixes verify recorded owner approval against preserved source status/date, require all imported rubric levels, and return diagnostics rather than crashing on a missing expected label.
 - Targeted independent re-review found no residual issues in those three fixes. Eight targeted tests and 23 synthetic boundary checks passed. All 70 original source records were also checked for exact preservation across unique mapped items and duplicate attachments.
@@ -82,4 +81,4 @@ Eight private questions also stay draft for lack of owner approval and a second 
 - Build the local Hugging Face package, then run `runner/bank.py --heldout /absolute/private/path/questions.jsonl` against the real private set before any push.
 - The public leak-check tests use synthetic questions only. The owner-side command is required to prove the actual private set is absent from this release candidate, including generated files.
 
-No paid model runs, baseline results, credentials, remote changes, branch push, PR creation, publication or upload. Owner approval is required before pushing/opening a PR. Hugging Face v0.2 upload waits until after merge.
+No paid model runs, baseline results, credentials, merge or dataset upload. Owner approval now covers the branch push and PR creation after the required owner-side leak check. Hugging Face v0.2 upload waits until after merge.

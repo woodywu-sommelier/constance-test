@@ -109,9 +109,17 @@ def validate(items: list[dict]) -> list[str]:
         if item["status"] == "confirmed" and not (item.get("reviewed_by") and item.get("reviewed_on")):
             problems.append(f"{where}: confirmed items need reviewed_by and reviewed_on")
         source = item.get('source_item')
-        owner_evidence = (isinstance(source, dict) and item.get('reviewed_by') == 'Woody Wu' and
-                          source.get('status') == 'approved_by_woody_' + str(item.get('reviewed_on')))
-        if item.get('review_basis') == 'recorded_owner_approval' and not owner_evidence:
+        source_owner_evidence = (isinstance(source, dict) and item.get('reviewed_by') == 'Woody Wu' and
+                                 source.get('status') == 'approved_by_woody_' + str(item.get('reviewed_on')))
+        review = item.get('owner_review', {})
+        new_owner_evidence = (item.get('review_basis') == 'recorded_owner_review' and
+                              isinstance(review, dict) and item.get('reviewed_by') == 'Woody Wu' and
+                              review.get('reviewed_by') == 'Woody Wu' and
+                              review.get('reviewed_on') == item.get('reviewed_on') and
+                              isinstance(review.get('evidence'), str) and bool(review['evidence'].strip()) and
+                              review.get('question_sha256') == sha256(item['question'].encode('utf-8')).hexdigest())
+        owner_evidence = source_owner_evidence or new_owner_evidence
+        if item.get('review_basis') in {'recorded_owner_approval', 'recorded_owner_review'} and not owner_evidence:
             problems.append(f'{where}: recorded owner approval evidence does not match the preserved source')
         if isinstance(source, dict) and item.get('reviewed_by') == 'Woody Wu' and not owner_evidence:
             problems.append(f'{where}: owner approval evidence is required before naming Woody as reviewer')

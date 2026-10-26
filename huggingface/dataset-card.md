@@ -24,9 +24,9 @@ configs:
 
 A benchmark for how often AI models fabricate when they talk about wine, by sommelier Woody Wu. Code and full documentation: [github.com/woodywu-sommelier/constance-test](https://github.com/woodywu-sommelier/constance-test).
 
-**Status: v0.2 preparation. Baseline results pending.** 78 unique questions after merging 70 local source items with the original 23 public questions and removing 15 duplicate cases. Only the **51 dev questions** are included here: 40 confirmed/eligible and 11 draft. The other 27 questions are private, with 19 confirmed/eligible and 8 draft. They are not included in this dataset, build output or repository. The public split manifest commits their exact-byte SHA-256 hash and aggregate counts only.
+**Status: v0.2 preparation. Baseline results pending.** 78 unique questions after merging 70 local source items with the original 23 public questions and removing 15 duplicate cases. Only the **51 dev questions** are included here, all confirmed/eligible after Woody approved the 11 formerly public drafts on 2026-10-25. The other 27 questions are private, with 19 confirmed/eligible and 8 draft, unchanged by that approval. They are not included in this dataset, build output or repository. The public split manifest commits their exact-byte SHA-256 hash and aggregate counts only.
 
-The original 23 retain their actual owner review. New items are eligible only through a recorded owner approval or two distinct HTTPS source sites. Source-qualified items name the eligibility check, not Woody, as reviewer; this is not a new factual audit or proof of editorial independence. Other items remain draft. All original sources, notes, approval statuses and rubrics are retained in `source_item` or `imported_items`. Recorded item approval is not a completed model or human response score.
+The original 23 retain their actual owner review. New items are eligible only through a recorded source approval, a separate question-hash-bound owner review, or two distinct HTTPS source sites. Source-qualified items name the eligibility check, not Woody, as reviewer; this is not a new factual audit or proof of editorial independence. Other items remain draft. All original sources, notes, approval statuses and rubrics are retained in `source_item` or `imported_items`. New approvals use `owner_review` rather than changing historical source statuses. Recorded item approval is not a completed model or human response score.
 
 ## Traps
 
@@ -63,6 +63,7 @@ The original 23 retain their actual owner review. New items are eligible only th
 | `facts`, `sources`, `requires_sources` | Source evidence preserved from the original records; drafts may have fewer than two source sites |
 | `fictional_entities` | True when the question uses invented producers |
 | `status`, `reviewed_by`, `reviewed_on` | Review state |
+| `owner_review` | Explicit later owner approval, date, evidence and current-question hash; absent unless recorded |
 | `source_item`, `source_status`, `imported_items`, `rubric`, `notes` | Preserved import evidence, original 0 to 2 rubric and notes; duplicate source records attach to retained public items |
 | `expected`, `scoring_tier`, `instruction_to_agent` | Code label, scoring method and original system instruction when supplied |
 

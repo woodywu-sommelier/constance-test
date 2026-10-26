@@ -70,6 +70,23 @@ class MappingTests(unittest.TestCase):
         q['reviewed_by'] = 'Woody Wu'
         self.assertTrue(any('approval evidence' in p for p in constance.validate([q])))
 
+    def test_new_owner_review_binds_current_question_without_rewriting_source_status(self):
+        q = bank.map_item(local_item(sources=['https://example.org/a']), 'dev')
+        original = copy.deepcopy(q['source_item'])
+        q.update(status='confirmed', review_basis='recorded_owner_review', reviewed_by='Woody Wu', reviewed_on='2026-10-25')
+        q['owner_review'] = {'reviewed_by': 'Woody Wu', 'reviewed_on': '2026-10-25',
+                             'evidence': 'Explicit owner approval in chat on 2026-10-25.',
+                             'question_sha256': hashlib.sha256(q['question'].encode('utf-8')).hexdigest()}
+        self.assertEqual(constance.validate([q]), [])
+        self.assertEqual(q['source_item'], original)
+        for field, value in [('question_sha256', 'wrong'), ('reviewed_on', '2026-10-24'), ('evidence', '')]:
+            bad = copy.deepcopy(q)
+            bad['owner_review'][field] = value
+            self.assertTrue(any('approval evidence' in p for p in constance.validate([bad])))
+        changed = copy.deepcopy(q)
+        changed['question'] += ' Edited.'
+        self.assertTrue(any('approval evidence' in p for p in constance.validate([changed])))
+
 
 class ScoringTests(unittest.TestCase):
     def question(self, trap="fact_or_fiction", expected="TRUE", status="confirmed"):
@@ -197,8 +214,8 @@ class ReleaseTests(unittest.TestCase):
         questions = constance.read_jsonl(ROOT / 'data/dev/questions.jsonl')
         card = constance.score(questions, constance.read_jsonl(ROOT / 'examples/answers-careful.jsonl'))
         self.assertEqual(card['totals'].get('pass'), 23)
-        self.assertEqual(card['totals'].get('draft'), 11)
-        self.assertEqual(card['totals'].get('missing'), 17)
+        self.assertEqual(card['totals'].get('draft', 0), sum(q['status']=='draft' for q in questions))
+        self.assertEqual(card['totals'].get('missing'), sum(q['status']=='confirmed' for q in questions)-23)
 
     def test_no_owner_credit_is_manufactured_for_imported_records(self):
         for q in constance.read_jsonl(ROOT / 'data/dev/questions.jsonl'):
@@ -208,7 +225,21 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(q['question'], source['prompt'])
             self.assertEqual(q['sources'], source.get('sources', []))
             if q.get('reviewed_by') == 'Woody Wu':
-                self.assertEqual(source['status'], 'approved_by_woody_' + q['reviewed_on'])
+                if q.get('review_basis') == 'recorded_owner_review':
+                    self.assertEqual(q['owner_review']['reviewed_on'], q['reviewed_on'])
+                    self.assertEqual(q['owner_review']['question_sha256'], hashlib.sha256(q['question'].encode('utf-8')).hexdigest())
+                else:
+                    self.assertEqual(source['status'], 'approved_by_woody_' + q['reviewed_on'])
+
+    def test_october25_owner_approval_is_exactly_the_eleven_named_public_items(self):
+        questions = constance.read_jsonl(ROOT / 'data/dev/questions.jsonl')
+        approved = [q for q in questions if q.get('review_basis') == 'recorded_owner_review']
+        self.assertEqual({q['source_id'] for q in approved}, set('ph-04 ph-05 ph-08 ph-14 ct-09 ct-12 ff-11 ff-12 ci-02 ci-03 fp-03'.split()))
+        for q in approved:
+            self.assertEqual(q['status'], 'confirmed')
+            self.assertEqual(q['reviewed_by'], 'Woody Wu')
+            self.assertEqual(q['reviewed_on'], '2026-10-25')
+        self.assertFalse(any(q['status']=='draft' for q in questions))
 
 
 if __name__ == "__main__":

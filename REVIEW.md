@@ -3,6 +3,7 @@
 The checklist below records the human-review standard. The original v0.1 records retain their actual owner review. The v0.2 import has two explicit eligibility paths, not a claim that Woody reviewed every source item:
 
 - A preserved `approved_by_woody_YYYY-MM-DD` status gives Woody credit on that recorded date.
+- An explicit later owner approval is recorded separately in `owner_review`, bound to the current question hash and review date. It does not rewrite the historical source status. [Eleven public approvals were recorded on 2026-10-25](docs/OWNER-APPROVAL-20261025.md). The eight private drafts were not approved and remain drafts.
 - Otherwise two distinct HTTPS source sites qualify under the import handover. `reviewed_by` names the source-eligibility check, not Woody. This checks source coverage, not that the URLs were reopened during migration or are editorially independent.
 - Fewer than two sites and no recorded owner approval means draft, including `verified_fictional` with only one source. Two pages on one site are one source site.
 
