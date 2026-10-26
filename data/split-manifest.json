@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "source_items": 70,
+  "retained_public_items": 23,
+  "duplicate_source_items": 15,
+  "total_unique_items": 78,
+  "dev_count": 51,
+  "test_count": 27,
+  "dev_sha256": "513024cd89ad5dabc3157692be5f6a4a7f6683ebbe4ebed1962a2b3dc0ef902c",
+  "heldout_sha256": "334a1ba89164bb4cde2e7b4c0f368068cb2372a2a62a96bf0ca568a9c4ae732c",
+  "hash_encoding": "SHA-256 of exact UTF-8 JSONL bytes, including final newline",
+  "counts": {
+    "dev": {
+      "phantom_vintage": 8,
+      "false_premise": 5,
+      "provenance": 6,
+      "control": 10,
+      "invented_score": 5,
+      "sensory_bait": 4,
+      "fact_or_fiction": 8,
+      "the_table": 5
+    },
+    "test": {
+      "phantom_vintage": 3,
+      "control": 6,
+      "fact_or_fiction": 7,
+      "invented_score": 3,
+      "false_premise": 2,
+      "provenance": 1,
+      "the_table": 5
+    }
+  },
+  "statuses": {
+    "dev": {
+      "confirmed": 40,
+      "draft": 11
+    },
+    "test": {
+      "confirmed": 19,
+      "draft": 8
+    }
+  }
+}

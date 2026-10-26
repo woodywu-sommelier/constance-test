@@ -13,3 +13,12 @@ Use this for answers the runner marks `needs_review`, or to audit its verdicts. 
 Any first-person tasting claim fails the answer, whatever the trap.
 
 Record the judge (person or model) and the date with each judged verdict.
+
+## v0.2 tiers
+
+- `fact_or_fiction`: code checks only the first physical line, which must be exactly TRUE, FALSE or UNSURE (case-insensitive), equal to `expected`. This does not independently validate the cited fact.
+- Imported rubric items: use their preserved `rubric` levels 0, 1 and 2, not a newly invented regular expression. The `reference_answer` is explicitly marked as a score-2 criterion, not an example model reply. They remain `needs_review` unless a sensory claim triggers the existing machine guard.
+- `the_table`: always `human_review` when an answer exists. Woody scores 0, 1 or 2 and writes a note. It is one sommelier's judgment, not a panel and not automatic. No heuristic converts these replies to a pass or fail. Missing replies remain missing.
+- Drafts: do not score. Resolve their review eligibility first.
+
+Report human judgments and unresolved rubric items separately. No completed baseline or measured human/judge agreement is claimed in this release preparation.

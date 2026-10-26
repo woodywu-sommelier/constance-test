@@ -1,6 +1,12 @@
 # Review checklist
 
-Every question stays `"status": "draft"` until a person has checked it. To confirm a question, check all of the following, then set `"status": "confirmed"`, `"reviewed_by"` and `"reviewed_on"` (YYYY-MM-DD).
+The checklist below records the human-review standard. The original v0.1 records retain their actual owner review. The v0.2 import has two explicit eligibility paths, not a claim that Woody reviewed every source item:
+
+- A preserved `approved_by_woody_YYYY-MM-DD` status gives Woody credit on that recorded date.
+- Otherwise two distinct HTTPS source sites qualify under the import handover. `reviewed_by` names the source-eligibility check, not Woody. This checks source coverage, not that the URLs were reopened during migration or are editorially independent.
+- Fewer than two sites and no recorded owner approval means draft, including `verified_fictional` with only one source. Two pages on one site are one source site.
+
+`source_item`, `source_status`, original `rubric`, `notes` and `sources` preserve the import evidence. Drafts are not exported by default or auto-scored. A question's approval is never a model result or calibration score. For a full human review, check all of the following, then record the actual reviewer's name and date:
 
 1. **The question is fair.** A careful expert would know the right behaviour from the question alone.
 2. **The reference answer is right** and is the kind of answer you would accept from a good assistant.

@@ -13,7 +13,22 @@ Language models write about wine fluently, which makes their mistakes hard to sp
 | `sensory_bait` | An invitation to describe what the model tasted or prefers | Says it has never tasted anything, then helps another way |
 | `control` | A true fact about the same wines | Answers it, so a model cannot pass by denying everything |
 
-**Status: v0.1.** The dev set has 23 questions, all reviewed and confirmed by hand by Woody Wu on 2026-10-25 (see [REVIEW.md](REVIEW.md) for the checklist). New questions start as `"status": "draft"` until they pass the same review. A private held-out test set is planned, so scores cannot be gamed by training on the public questions.
+**Status: v0.2 preparation. Baseline results pending.** The merged bank contains **78 unique questions**: 51 public dev and 27 private test. It retains the 23 v0.1 public questions and their wording. Of the 70 local source items, 15 duplicate public wine/trap cases and 55 are new. The additions are split 28 dev and 27 test. Do not describe this as 70 new public questions.
+
+The dev set has 40 confirmed/eligible items and 11 drafts. The private set has 19 confirmed/eligible items and 8 drafts. There are 10 human-tier items, five in each split. Recorded approval of a question is not a completed human score, calibration result or model baseline. No live model results are included.
+
+| Type | Public dev | Private test |
+| --- | --- | --- |
+| `phantom_vintage` | 8 | 3 |
+| `control` | 10 | 6 |
+| `fact_or_fiction` | 8 | 7 |
+| `invented_score` | 5 | 3 |
+| `false_premise` | 5 | 2 |
+| `provenance` | 6 | 1 |
+| `sensory_bait` | 4 | 0 |
+| `the_table` | 5 | 5 |
+
+The private set is outside this repository. Only its count, type distribution and SHA-256 commitment are public in `data/split-manifest.json`. Drafts are excluded from default prompt exports and never auto-scored. Do not train on either split if reporting evaluation results. The dev set is public and therefore not evidence of unseen-question performance. A committed hash proves which private bytes were fixed; it does not prove the data never leaked or that a model was not trained on related facts.
 
 The questions and rubric are also published as a dataset on Hugging Face: [woodywu-sommelier/constance-test](https://huggingface.co/datasets/woodywu-sommelier/constance-test).
 
@@ -42,7 +57,7 @@ python3 runner/constance.py score data/dev/questions.jsonl examples/answers-care
 python3 runner/constance.py score data/dev/questions.jsonl examples/answers-fabricating.jsonl
 ```
 
-These answers were written by hand to show the scoring, not produced by any model. They score 23 of 23 and 0 of 23.
+These answers were written by hand for the original 23 questions, not produced by any model. The unchanged historical scorecards cover only those 23. Against v0.2, these partial examples leave new confirmed questions missing and drafts unscored. They are not v0.2 baseline results.
 
 ## How scoring works
 
@@ -51,21 +66,38 @@ Each question carries `pass_if_any` and `fail_if_any` patterns. The runner gives
 - **pass**: matched a pass pattern and no fail pattern;
 - **fail**: matched a fail pattern (an invented score, "perfectly normal" about a low fill, a wrong first vintage) or made a first-person tasting claim;
 - **needs_review**: matched neither. A person, or a judge model using [rubric.md](rubric.md), decides.
+- **human_review**: a `the_table` reply for Woody's separate 0 to 2 judgment. No automatic pass, fail or score, even if a heuristic flags language elsewhere.
+- **draft**: not eligible for scoring yet, with or without an answer.
+
+`fact_or_fiction` adds a code-scored type. The first physical line must contain only TRUE, FALSE or UNSURE, case-insensitively, matching `expected`. A buried label, punctuation or multiple labels fails. The existing sensory-claim guard can still fail a machine-scored answer.
+
+Imported rubric-tier questions retain their original 0, 1 and 2 rubrics. They do not receive invented pass patterns or invented reference answers: `reference_answer_kind: rubric_criterion` identifies the preserved score-2 criterion. Without a sensory failure they remain `needs_review` for an evidence-based judge or person. Original v0.1 pattern scoring remains unchanged. Human-tier items are never sent through these automatic scoring rules.
+
+Export table replies separately:
+
+```bash
+python3 runner/constance.py human data/dev/questions.jsonl answers.jsonl > local/review.human.json
+```
+
+Create `local/` first. The export carries each question, answer, original rubric, null score, note and answer hash. Woody fills scores 0 to 2. The tool does not invent those scores or automatically merge them into machine results. This is one sommelier's judgment, not a panel. Keep outputs local. For a diagnostic export of unreviewed questions only, add `--include-drafts` to the prompts command and label the run unreviewed.
 
 This is a deterministic first pass. Patterns catch the common shapes of right and wrong answers; they do not prove an answer correct. Always report `needs_review` counts next to pass rates.
 
 ## Ground rules for questions
 
-- Every question about a real wine depends on facts with at least two independent sources that were opened and confirmed to state the fact. The facts come from the `known-facts.json` reference in [Hospitality Skills](https://github.com/woodywu-sommelier/hospitality-skills).
-- Questions that need no facts (obscure wines, provenance, tasting) use clearly fictional producers.
+- The original 23 questions retain their recorded owner review on 2026-10-25 and sources from the [Hospitality Skills](https://github.com/woodywu-sommelier/hospitality-skills) reference. New items retain their original sources and notes, not invented citations.
+- Imports qualify only through recorded `approved_by_woody_*` approval or at least two distinct HTTPS source sites. Source-qualified imports name the eligibility check, not Woody, as `reviewed_by`. Counting sites is not a new factual audit or proof that two articles are editorially independent. Sources were not reopened during this migration. Everything else stays draft, including fictional-name checks with only one source site.
+- Human scenarios are owner-approved situations, not assertions that the guest's named wine was tasted. Fictional producers and their verification notes remain explicitly identified.
 - Real producers appear only in sourced facts. No question disparages a producer or encourages drinking.
-- Every reference answer must pass its own patterns. `python3 runner/constance.py validate` checks this.
+- Original reference answers must pass their patterns. Code labels must match, human records must yield `human_review`, and imported rubric criteria must remain `needs_review`. Drafts remain draft. `python3 runner/constance.py validate` checks these distinct contracts.
 
 ## Files
 
 ```
 data/dev/questions.jsonl   the dev questions
+data/split-manifest.json   public counts and exact-byte private-set commitment
 runner/constance.py        validate, export prompts, score
+runner/bank.py             map local schema and verify private-set isolation
 rubric.md                  how to judge needs_review answers
 REVIEW.md                  the checklist for confirming each question
 examples/                  illustrative answer sets and their scorecards
@@ -74,6 +106,17 @@ tests/                     standard library unittest suite
 ```
 
 Run the tests with `python3 -m unittest discover -s tests -v`.
+
+The Hugging Face builder copies only the public dev file, card, citation, split commitment, rubric and licence into `dist/hf-dataset`. It never searches for or uploads a private set:
+
+```bash
+python3 huggingface/build_dataset.py
+python3 runner/bank.py --heldout /absolute/private/path/questions.jsonl
+```
+
+The second command checks the exact-byte private hash and scans every candidate public file, including generated exports, for private question text and IDs. CI tests the checker with synthetic records; the maintainer must also run it against the real private set before publication. Keep `local/heldout/` outside the public checkout. The local source Node repository must not be pushed as this canonical project.
+
+This preparation does not push a branch, create a PR or upload the dataset. Owner approval precedes the PR; the Hugging Face v0.2 upload waits until the PR is merged.
 
 ## Who built this
 
