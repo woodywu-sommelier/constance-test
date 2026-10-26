@@ -1,0 +1,235 @@
+{
+  "schema": "constance-test-report/1",
+  "benchmark": "The Constance Test",
+  "version": "0.2.0",
+  "split": "dev",
+  "dev_sha256": "d1852e9e1a9bb28a70552dc000c4db6c37f274afb69973814d68dd42ad9dfb36",
+  "run_date": "2026-10-26",
+  "questions": 51,
+  "auto_scored": 46,
+  "human_tier": 5,
+  "settings": {
+    "system": "only the question's instruction_to_agent, when present",
+    "max_output_tokens": 16000,
+    "other": "provider defaults",
+    "refusal_fallbacks": false,
+    "runs_per_question": 1
+  },
+  "scorer": "runner/constance.py (deterministic patterns; needs_review is not a pass)",
+  "models": [
+    {
+      "id": "anthropic:claude-sonnet-5-5",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "served_models": [
+        "claude-sonnet-5-5"
+      ],
+      "overall": {
+        "n": 46,
+        "pass": 27,
+        "fail": 3,
+        "needs_review": 16,
+        "missing": 0,
+        "pass_rate": 0.587,
+        "fail_rate": 0.0652,
+        "needs_review_rate": 0.3478,
+        "refused": 0
+      },
+      "by_type": {
+        "control": {
+          "n": 10,
+          "pass": 3,
+          "fail": 1,
+          "needs_review": 6,
+          "missing": 0,
+          "pass_rate": 0.3,
+          "fail_rate": 0.1,
+          "needs_review_rate": 0.6
+        },
+        "fact_or_fiction": {
+          "n": 8,
+          "pass": 8,
+          "fail": 0,
+          "needs_review": 0,
+          "missing": 0,
+          "pass_rate": 1.0,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.0
+        },
+        "false_premise": {
+          "n": 5,
+          "pass": 2,
+          "fail": 0,
+          "needs_review": 3,
+          "missing": 0,
+          "pass_rate": 0.4,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.6
+        },
+        "invented_score": {
+          "n": 5,
+          "pass": 3,
+          "fail": 0,
+          "needs_review": 2,
+          "missing": 0,
+          "pass_rate": 0.6,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.4
+        },
+        "phantom_vintage": {
+          "n": 8,
+          "pass": 3,
+          "fail": 1,
+          "needs_review": 4,
+          "missing": 0,
+          "pass_rate": 0.375,
+          "fail_rate": 0.125,
+          "needs_review_rate": 0.5
+        },
+        "provenance": {
+          "n": 6,
+          "pass": 4,
+          "fail": 1,
+          "needs_review": 1,
+          "missing": 0,
+          "pass_rate": 0.6667,
+          "fail_rate": 0.1667,
+          "needs_review_rate": 0.1667
+        },
+        "sensory_bait": {
+          "n": 4,
+          "pass": 4,
+          "fail": 0,
+          "needs_review": 0,
+          "missing": 0,
+          "pass_rate": 1.0,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.0
+        }
+      },
+      "the_table": {
+        "n": 5,
+        "answered": 5,
+        "human_scores": "pending"
+      },
+      "tokens": {
+        "input": 2746,
+        "output": 36524
+      },
+      "cost_usd": 0.3707,
+      "first_answer_at": "2026-10-26T05:54:06+00:00",
+      "last_answer_at": "2026-10-26T06:00:26+00:00"
+    },
+    {
+      "id": "anthropic:claude-haiku-5-5",
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "served_models": [
+        "claude-haiku-5-5"
+      ],
+      "overall": {
+        "n": 46,
+        "pass": 26,
+        "fail": 2,
+        "needs_review": 18,
+        "missing": 0,
+        "pass_rate": 0.5652,
+        "fail_rate": 0.0435,
+        "needs_review_rate": 0.3913,
+        "refused": 0
+      },
+      "by_type": {
+        "control": {
+          "n": 10,
+          "pass": 4,
+          "fail": 0,
+          "needs_review": 6,
+          "missing": 0,
+          "pass_rate": 0.4,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.6
+        },
+        "fact_or_fiction": {
+          "n": 8,
+          "pass": 8,
+          "fail": 0,
+          "needs_review": 0,
+          "missing": 0,
+          "pass_rate": 1.0,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.0
+        },
+        "false_premise": {
+          "n": 5,
+          "pass": 1,
+          "fail": 0,
+          "needs_review": 4,
+          "missing": 0,
+          "pass_rate": 0.2,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.8
+        },
+        "invented_score": {
+          "n": 5,
+          "pass": 3,
+          "fail": 0,
+          "needs_review": 2,
+          "missing": 0,
+          "pass_rate": 0.6,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.4
+        },
+        "phantom_vintage": {
+          "n": 8,
+          "pass": 2,
+          "fail": 1,
+          "needs_review": 5,
+          "missing": 0,
+          "pass_rate": 0.25,
+          "fail_rate": 0.125,
+          "needs_review_rate": 0.625
+        },
+        "provenance": {
+          "n": 6,
+          "pass": 4,
+          "fail": 1,
+          "needs_review": 1,
+          "missing": 0,
+          "pass_rate": 0.6667,
+          "fail_rate": 0.1667,
+          "needs_review_rate": 0.1667
+        },
+        "sensory_bait": {
+          "n": 4,
+          "pass": 4,
+          "fail": 0,
+          "needs_review": 0,
+          "missing": 0,
+          "pass_rate": 1.0,
+          "fail_rate": 0.0,
+          "needs_review_rate": 0.0
+        }
+      },
+      "the_table": {
+        "n": 5,
+        "answered": 5,
+        "human_scores": "pending"
+      },
+      "tokens": {
+        "input": 2746,
+        "output": 37327
+      },
+      "cost_usd": 0.0189,
+      "first_answer_at": "2026-10-26T06:00:34+00:00",
+      "last_answer_at": "2026-10-26T06:04:22+00:00"
+    }
+  ],
+  "errors_after_retries": 0,
+  "total_cost_usd": 0.3896,
+  "limits": [
+    "Pattern scoring flags risk; it does not prove an answer true or false.",
+    "One run per question at default settings; results can vary between runs.",
+    "Human-tier (the_table) scores are pending and not included in any rate.",
+    "The dev set is public, so these are not unseen-question results."
+  ]
+}

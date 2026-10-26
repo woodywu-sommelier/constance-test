@@ -1,0 +1,233 @@
+{
+  "raw_sha256": {
+    "results/v0.2-baseline/report.json": "9cec5356777862b6a6e3d8fa9697af861c4e9a5648d8401d4b9cbfda105a1121",
+    "runner/constance.py": "4d0cf92e8360476b66ec27ca374c963669aa610fa86fad1014959d4f11b4a4a5",
+    "data/dev/questions.jsonl": "d1852e9e1a9bb28a70552dc000c4db6c37f274afb69973814d68dd42ad9dfb36",
+    "results/v0.2-baseline/answers/anthropic__claude-sonnet-5-5.jsonl": "71f21318498045a26d31dcced56c87b3be202f8f68d570dcef2fcc5577ba2baa",
+    "results/v0.2-baseline/scorecards/anthropic__claude-sonnet-5-5.md": "4fdf550ea6b60e53c8ae214fba9e827bf09fc0baa01cc05508dd11ecfc0c62f5",
+    "results/v0.2-baseline/answers/anthropic__claude-haiku-5-5.jsonl": "3d99dddcee5dc6173e8a1433423574d8563e0bfecdd8566b973566f9dac9b14d",
+    "results/v0.2-baseline/scorecards/anthropic__claude-haiku-5-5.md": "2058acd4c140ee6ab42ca035787488893da090f61c39cf40fdddc76ee226d2e6"
+  },
+  "answers": [
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-001",
+      "answer_sha256": "1fea33879f0e81b66b5a9839275df69999f8f790aa550e00bd82f4a073f50fbe"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-004",
+      "answer_sha256": "a2f965c17c99b9be948d3ad9ab12017313449555ce7e3cd7ac635da7abb9a86a"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-005",
+      "answer_sha256": "88e444963a40d6524d6bb4f1523e14998e338fb929d3c0f7783ed59e4efa53c6"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-006",
+      "answer_sha256": "a3ae93bd9676864dfb2974b848e2adbd95949f74e8ca9201c7af5b2163166e37"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-007",
+      "answer_sha256": "5775e65790696fbe262ac9bebd1d0342625e2f6764b0abf6aa075035bfe9c827"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-011",
+      "answer_sha256": "e4f391572eae1e107a4c3c1d5638f014f0fe11a059678a080af7895bbe0e7ee4"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-dev-016",
+      "answer_sha256": "f0853453fe2b98fbf2cfcaae923494e8770dcc2b486f274da6054681058112f5"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-04",
+      "answer_sha256": "85a353943b018f7f54ed13af1175fcc7bf2c521a8318910be67f0cfe09a13579"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-05",
+      "answer_sha256": "35e5cf25758af0ec1433085aa11da276c6e4796879d95f64ed2e619b4e37f71c"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-08",
+      "answer_sha256": "cf4faa42678320bb2d6f4992c4b6dc74a06ada567a57fe9f3df6bb69d30773b0"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ph-14",
+      "answer_sha256": "42c9b490451fc5a93d28f588070d48efe677c4d2e7abf8a59150313ef07b91bb"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-01",
+      "answer_sha256": "a0e02a89e060409661985839643eac19c164b73a5151236edd9649bca4ace8bd"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-02",
+      "answer_sha256": "5399a1bc1987bacaf7779d72fad8475970fd0ca14ccce41fe39b50d316ece316"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-04",
+      "answer_sha256": "31a6bb10287b3d31cabb03c40fa68f4bb1265649d5332bd12404963e21c680a7"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-08",
+      "answer_sha256": "aabdd1941bff969bf4061c9f9321724648afc01dc80ed3e007d3903939d6f528"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-09",
+      "answer_sha256": "843e3dba121daffef7b9f351bef814705441cabfb5f04ba5feb2eabc0f534a1b"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ct-12",
+      "answer_sha256": "379b9badd981c9d014a6aec1023a46020ecea3e56a67e9fe634761c8c666d484"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ci-02",
+      "answer_sha256": "dd486f3a4ee50629257ad29fbf32f968a200835befd60cdbb6a7a6605471d642"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-ci-03",
+      "answer_sha256": "c6f8ec141eb8a46d251cfb883efb7081e0b355cbbd877804a598fdbd92dc6730"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-fp-01",
+      "answer_sha256": "24ed445895463ca67a3598258b399c84737ceca2f4336144611656be73927e3f"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-fp-03",
+      "answer_sha256": "d8ebd40a2303f8871f79ad93a85e3389ff588be8477290f20cf3ee1457c8c8d0"
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "id": "CT-v02-pv-01",
+      "answer_sha256": "0e6ae24650de23dcc3817f0163b45c82f622fce0cb68ecd08db659baeb5d4f97"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-001",
+      "answer_sha256": "6fe05e182599f411cdaa238749fc321b40b2cd8b3a64686bf5933fb2f1078ca6"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-003",
+      "answer_sha256": "7d0b0cd3b4c25e3d926f49ee43965d1530c5ef602d736a92a92e7e739989f80f"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-004",
+      "answer_sha256": "c18a9eff7b9423e1c3346b40015abd7f0cd2ffa98edb58dfccbdd21a737d6821"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-005",
+      "answer_sha256": "30b7b126a8bc9a9aaefd92ddbd4766eed72526a6cc469b5607eaef7eb830252b"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-006",
+      "answer_sha256": "a457957543e1e43423b7db752318342531e375ff0c98e4c53f35e430a27a1450"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-007",
+      "answer_sha256": "09512e905c72bf22aee6884ac4375203d4f568ba19143f74a870eaff3322e129"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-dev-018",
+      "answer_sha256": "0d395fbc6123b0a693b8bcb23740071188e86451b7738c6a819a9b2a8f505529"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-04",
+      "answer_sha256": "5a3943b010967ce595ad2a76f9ce3ca8d79b4d6d0d3b95dca6ac4cc0fe98057c"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-05",
+      "answer_sha256": "638a14e72ebfe29b695fdec7be52bec1043ea81eb7cb95a640a468dd9d858874"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-08",
+      "answer_sha256": "a0c1f47e3650895f2fcd50c986a8425d97c2255abc1918fcfd6c339af1f2f140"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ph-14",
+      "answer_sha256": "a6f385182e509641c656566f1225ec55212be66d163a11ab48713071cf442656"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-01",
+      "answer_sha256": "f0c61f5695b3a842b6cbbd39e0ab3bb1913ab445df83b1c67244e9c1542ab02f"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-02",
+      "answer_sha256": "f1bbfe0873eb3c8c0909429529e0fddb46327049e198f50a350710a7cff2b3f5"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-04",
+      "answer_sha256": "a75fa6f9ff6bd35fba7ab89bbcad96071d3b747b3fe5ee2778428c055e2593f1"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-08",
+      "answer_sha256": "f568a995bb43cf164dc75ed984b893522ef3d0bc0e740bdcfc57ed240cb082ba"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-09",
+      "answer_sha256": "0d43427b526e2f0508e852bb746f6ad19b1a61681cfc8dafe584cb6ecb44fe75"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ct-12",
+      "answer_sha256": "8ae8701cb988c70dca97e8f75fe4d56cfd0183edce708fa78ade33b7362656e1"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ci-02",
+      "answer_sha256": "055bf11ec02c61ff92cb6ac46f537e09bebb7edf3796aa251d1e42d3f3985e75"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-ci-03",
+      "answer_sha256": "affcbfee685efaa572d3d70f1aefe678ce30556e08e116b3b1878d970018b52c"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-fp-01",
+      "answer_sha256": "cdf9d012b998fb95bb6ac180c73b34aaf525865e26532c9e55439afca279825c"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-fp-03",
+      "answer_sha256": "ec5df407d2710f4be115da1e6df5fd67c0be237277bec973bd5cacf1c0c1874a"
+    },
+    {
+      "model": "anthropic:claude-haiku-5-5",
+      "id": "CT-v02-pv-01",
+      "answer_sha256": "eeac7ee70ad451361e9a7963c0f1ecdc29205de299ab2c60e8ef7497f1a86379"
+    }
+  ]
+}
