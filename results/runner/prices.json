@@ -1,0 +1,14 @@
+{
+  "about": "List prices per million tokens, used for the dry-run estimate and the cost in report.json. Pending Woody's confirmation. Check each source again on the run date.",
+  "checked_on": "2026-10-26",
+  "models": {
+    "anthropic:claude-sonnet-5-5": {"input": 2.00, "output": 10.00,
+      "source": "Anthropic model and pricing table (Claude API reference)"},
+    "anthropic:claude-haiku-5-5": {"input": 0.10, "output": 0.50,
+      "source": "Anthropic model and pricing table (Claude API reference), prompts up to 100K tokens"},
+    "openai:gpt-6-astra": {"input": 10.00, "output": 50.00,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-astra and https://developers.openai.com/api/docs/pricing (standard tier, prompts up to 272K tokens)"},
+    "google:gemini-4-argon": {"input": 2.00, "output": 10.00,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing (introductory price through 2026-11-30, then 4.00 / 20.00)"}
+  }
+}
