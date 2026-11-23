@@ -1,6 +1,18 @@
 # The Constance Test
 
-A benchmark for how often AI models fabricate when they talk about wine. Built by Woody Wu, sommelier (WSET Diploma, ISG Diploma) and wine domain expert for LLM evaluation.
+The Constance Test is a wine AI benchmark that checks whether models invent facts, accept false premises or claim sensory experience.
+
+## Try it in one minute
+
+From a checkout with Python 3.11 or newer, score a hand-written example. No install, network or API key is needed.
+
+```sh
+python3 runner/constance.py score data/dev/questions.jsonl examples/answers-careful.jsonl
+```
+
+The example covers the original 23 questions. The runner also reports missing replies and items that need review on the 51-question public development set. This is a demo, not a model result.
+
+## What it tests
 
 Language models write about wine fluently, which makes their mistakes hard to spot. The Constance Test asks questions designed to tempt a model into the five most common kinds of fabrication, plus control questions that a careful model should simply answer:
 
@@ -13,9 +25,9 @@ Language models write about wine fluently, which makes their mistakes hard to sp
 | `sensory_bait` | An invitation to describe what the model tasted or prefers | Says it has never tasted anything, then helps another way |
 | `control` | A true fact about the same wines | Answers it, so a model cannot pass by denying everything |
 
-**Status: v0.2 preparation. Baseline results pending.** The merged bank contains **78 unique questions**: 51 public dev and 27 private test. It retains the 23 v0.1 public questions and their wording. Of the 70 local source items, 15 duplicate public wine/trap cases and 55 are new. The additions are split 28 dev and 27 test. Do not describe this as 70 new public questions.
+**Version 0.2.** The bank contains **78 unique questions**: 51 public dev and 27 private test. It retains the 23 v0.1 public questions and their wording. Of the 70 local source items, 15 duplicate public wine/trap cases and 55 are new. The additions are split 28 dev and 27 test. See the [published public development baseline](https://woodywusommelier.com/constance-test/?utm_source=github&utm_medium=readme&utm_content=constance-test-readme-results) for the tested models, adjudication and limits.
 
-The dev set has 51 confirmed/eligible items and no drafts. Woody explicitly approved the 11 formerly public drafts on 2026-10-25; see [the owner approval record](docs/OWNER-APPROVAL-20261025.md). The private set is unchanged, with 19 confirmed/eligible items and 8 drafts. There are 10 human-tier items, five in each split. Recorded approval of a question is not a completed human score, calibration result or model baseline. No live model results are included.
+The dev set has 51 confirmed/eligible items and no drafts. Woody explicitly approved the 11 formerly public drafts on 2026-10-25; see [the owner approval record](docs/OWNER-APPROVAL-20261025.md). The private set is unchanged, with 19 confirmed/eligible items and 8 drafts. There are 10 human-tier items, five in each split. Recorded approval of a question is not a completed human score, calibration result or model baseline.
 
 | Type | Public dev | Private test |
 | --- | --- | --- |
@@ -116,14 +128,12 @@ python3 runner/bank.py --heldout /absolute/private/path/questions.jsonl
 
 The second command checks the exact-byte private hash and scans every candidate public file, including generated exports, for private question text and IDs. CI tests the checker with synthetic records; the maintainer must also run it against the real private set before publication. Keep `local/heldout/` outside the public checkout. The local source Node repository must not be pushed as this canonical project.
 
-The owner approved pushing the branch and opening a PR on 2026-10-25 after the real held-out leak check passes. The Hugging Face v0.2 upload waits until the PR is merged. The local dataset build never uploads anything.
-
 ## Who built this
 
-**Woody Wu** is a sommelier with both the WSET Diploma and the ISG Diploma, a hospitality operator and an AI builder: [woodywusommelier.com](https://woodywusommelier.com).
-
-For evaluation design, domain-expert grading, or a run on the private test set, see **For AI Teams**: [woodywusommelier.com/consulting/ai-teams/](https://woodywusommelier.com/consulting/ai-teams/).
+Woody Wu is a sommelier, hospitality operator and AI builder in Western Canada, with dual WSET and ISG Diplomas, who writes The Floor and the Terminal and built The House Somm.
 
 ## Licence
 
 Code: [MIT](LICENSE). Questions and reference answers: [CC BY 4.0](LICENSE-DATA). Please cite with [CITATION.cff](CITATION.cff).
+
+Want a wine domain expert to review replies that need judgment? [For AI Teams](https://woodywusommelier.com/consulting/ai-teams/?utm_source=github&utm_medium=readme&utm_content=constance-test-readme).
